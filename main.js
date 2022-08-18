@@ -3,7 +3,7 @@ class Pizzas {
         this.id = id;
         this.nombre = nombre;
         this.ingredientes = ingredientes;
-        this.precio = precio;
+        this.precio = precio;                                                                         
     }
 }
 
@@ -23,44 +23,57 @@ const pizzas = [
 
 ]
 
-function impar() {
+console.log('*Consigna 1:')
+
+function impar(pizzas) {
+    
     let pizzasImpares=[];
-    for (i=0; i<pizzas.length; i++){
+   
+    pizzas.forEach( (pizza) => {
 
-        if ((pizzas[i].id %2) !==0){
-            pizzasImpares.push(" " + pizzas[i].nombre)
-         } 
-        } 
-       console.log("Las Pizzas con id impar son las siguientes:" + pizzasImpares)
-};
+        pizza.id %2 !== 0 ? pizzasImpares.push (" " + pizza.nombre) : null;
+
+    });
+    console.log("Las Pizzas con ID impar son las siguientes:" + pizzasImpares)
+}
+
+impar(pizzas)
+
+console.log('*Consigna 2:')
+
+function masBarata (pizzas) {
+
+    const pizzaMasBarata = pizzas.some(function(pizza){
+        return pizza.precio <=599
+    });
+
+    console.log(pizzaMasBarata ? 'Tenemos pizzas con precios mas bajos a $600' : 'No tenemos pizzas mas baratas que $600')
+
+}
+
+masBarata(pizzas)
+
+
+console.log ('*Consigna 3:')
+
+function NombrePrecio (pizzas) {
+ pizzas.forEach( (pizza) => {
+    console.log(`La Pizza "${pizza.nombre}" tiene un precio de $${pizza.precio}`)
+ })           
+}
  
-impar()
+NombrePrecio(pizzas)
 
-function masBarata () {
+console.log('*Consigna 4:')
 
-    for (i=0; i<pizzas.length; i++){
+function ingredientes (pizzas) {
+    pizzas.forEach((pizza) => {
+        console.log('la Pizza ' + pizza.nombre + ' tiene los siguientes ingredientes:')
 
-        if (pizzas[i].precio<600){
-           console.log(`La Pizza "${pizzas[i].nombre}" es la mas barata. Su Precio es de: $${pizzas[i].precio}`)
-       }
-}
-}
-
-masBarata()
-
-function NombrePrecio () {
-    for (i=0; i<pizzas.length; i++){
-           console.log(`La Pizza "${pizzas[i].nombre}" tiene un precio de $${pizzas[i].precio}`)
-       }
-}
- 
-NombrePrecio()
-
-
-function ingredientes () {
-    for (i=0; i<pizzas.length; i++){
-        console.log(`La Pizza "${pizzas[i].nombre}" tiene los siguientes ingredientes: ${pizzas[i].ingredientes}`)
-    }
+        pizza.ingredientes.forEach( (ingrediente) => {
+            console.log(`- ${ingrediente}`)
+        })
+    });
 }
 
-ingredientes()
+ingredientes(pizzas)
